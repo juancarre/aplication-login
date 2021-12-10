@@ -1,0 +1,12 @@
+
+.router-outlet-container {
+  margin-top: 70px;
+  min-height: 500px;
+}
+
+.footer-container {
+  margin-top: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+}

@@ -1,0 +1,20 @@
+<div class="login">
+  <form class="custom-form" method="post">
+    <h1>Activate Account</h1>
+    <input
+      type="text"
+      [(ngModel)]="user_id"
+      name="user_id"
+      placeholder="Id de usuario"
+      required="required"
+    />
+    <input
+      type="text"
+      [(ngModel)]="token"
+      name="token"
+      placeholder="Token de activacion"
+      required="required"
+    />
+    <button type="submit" (click)="activateUser()">Activar usuario</button>
+  </form>
+</div>
