@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from 'src/app/Core/Model/user';
 import { UserService } from '../../Core/Service/user.service';
-import { NgModel, FormControl, FormGroup, Form, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthenticationService } from '../../Core/Service/authentication.service';
 
 
 @Component({
@@ -13,20 +10,17 @@ import { AuthenticationService } from '../../Core/Service/authentication.service
 export class HomeComponent implements OnInit {
 
     currentUser: any;
+    isDataAvailable: boolean = false;
 
     constructor(
         private userService: UserService,
-        private authenticationService: AuthenticationService
         ) { }
 
     ngOnInit(): void {
-        // this.userService.getUser(this.authenticationService.userIdFromToken()).subscribe( user =>{
-        //     //this.userService.saveUserOnLocalStorage(user);
-        //     this.currentUser = user;
-        // });
-
-        this.currentUser = this.userService.getUser(this.authenticationService.userIdFromToken());
-
+        this.userService.getUser().subscribe(user => {
+            this.currentUser = user;
+            this.isDataAvailable = true;
+        });
     }
 
 }

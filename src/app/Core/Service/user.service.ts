@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, map, Observable, Subscription, tap } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, Subscription, tap, mergeMap, of } from 'rxjs';
 import { UserModel, UserAdapter } from '../Model/user';
 import { environment } from 'src/environments/environment';
 import { mapTo } from 'rxjs-compat/operator/mapTo';
@@ -15,45 +15,28 @@ export class UserService {
 
     constructor(
         private http: HttpClient,
-        private adapter: UserAdapter
+        private userAdapter: UserAdapter
     ) {
         this.currentUserSubject = new BehaviorSubject<{ currentUser: UserModel } | null>(JSON.parse(localStorage.getItem('currentUser')!));
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    getUser(idUser: string) {
-
-        console.log(idUser);
-        
-        this.getCurrentUserFromLocalStorage().subscribe(user => {
-            console.log(user);
-            if( user instanceof UserModel) {
-                console.log(user);
-                
-                return user;
-            }
-
-            return this.http.get(`${environment.apiUrl}users/${idUser}`).pipe(
-                tap( item => console.log(item)),
-                map((item: any) =>
-                    this.adapter.adapt(item)
-                ),
-                tap((user: UserModel) => this.saveUserOnLocalStorage(user))
-            ).subscribe(user => {return user});
-        });
-
-        
+    getUser() {
+        const userFromLocalStorage = of(JSON.parse(localStorage.getItem('currentUser')!));
+        return userFromLocalStorage.pipe(
+            map((item: any) => {
+                if (item) {
+                    const user = this.userAdapter.adapt(item);
+                    return user;
+                }
+                return null;
+            })
+        );
     }
 
     saveUserOnLocalStorage(user: UserModel): void {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next({currentUser: user});
-    }
-
-    getCurrentUserFromLocalStorage(): Observable<UserModel> {
-        return this.currentUser.pipe(
-            map((item: any) => this.adapter.adapt(item))
-        );
     }
 
     login(payload: object): Observable<any> {

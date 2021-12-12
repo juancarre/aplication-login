@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
-import { UserModel } from '../Model/user';
+import { BehaviorSubject, flatMap, map, Observable, tap } from 'rxjs';
+import { UserAdapter, UserModel } from '../Model/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import jwt_decode from "jwt-decode";
@@ -17,7 +17,8 @@ export class AuthenticationService {
 
     constructor(
         private http: HttpClient,
-        private userService: UserService
+        private userService: UserService,
+        private userAdapter: UserAdapter
     ) {
         this.currentUserTokenSubject = new BehaviorSubject<{ token: string } | null>(JSON.parse(localStorage.getItem('currentToken')!));
         this.currentUserToken = this.currentUserTokenSubject.asObservable();
@@ -27,24 +28,25 @@ export class AuthenticationService {
         return this.currentUserTokenSubject.value;
     }
 
-    userIdFromToken(): string {
-        console.log('dentro');
-        
-        try {
-            const tokenInfo: {exp: number, iat: number, id: string, username: string} = jwt_decode(this.currentUserTokenValue?.token!);
-            return tokenInfo.id;
-        } catch (error) {
-            return 'No se ha podido obtener la información del token';
-        }
-    }
-
     login(username: string, password: string) {
         return this.http.post<any>(`${environment.apiUrl}users/login_check`, { username, password })
             .pipe(
                 map(token => {
                     localStorage.setItem('currentToken', JSON.stringify(token));
                     this.currentUserTokenSubject.next(token);
-                    return token;
+
+                    const tokenInfo: {exp: number, iat: number, id: string, username: string} = jwt_decode(token.token);
+                    return tokenInfo;
+                }),
+                flatMap(tokenInfo => {
+                    return this.http.get(`${environment.apiUrl}users/${tokenInfo.id}`).pipe(
+                        map((item: any) =>
+                            this.userAdapter.adapt(item)
+                        )
+                    );
+                }),
+                tap(user => {
+                    this.userService.saveUserOnLocalStorage(user);
                 })
             );
     }
