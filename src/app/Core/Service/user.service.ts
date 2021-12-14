@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, catchError, map, Observable, Subscription, tap, mergeMap, of } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { UserModel, UserAdapter } from '../Model/user';
-import { environment } from 'src/environments/environment';
-import { mapTo } from 'rxjs-compat/operator/mapTo';
+
 
 @Injectable({
     providedIn: 'root',
@@ -12,6 +11,8 @@ export class UserService {
 
     private currentUserSubject: BehaviorSubject<{ currentUser: UserModel } | null>;
     public currentUser: Observable<{ currentUser: UserModel } | null>;
+
+    @Output() getLoggedUser: EventEmitter<UserModel> = new EventEmitter();
 
     constructor(
         private http: HttpClient,
@@ -27,6 +28,7 @@ export class UserService {
             map((item: any) => {
                 if (item) {
                     const user = this.userAdapter.adapt(item);
+                    this.getLoggedUser.emit(user);
                     return user;
                 }
                 return null;

@@ -9,18 +9,10 @@ import { UserService } from '../../Core/Service/user.service';
 })
 export class HomeComponent implements OnInit {
 
-    currentUser: any;
-    isDataAvailable: boolean = false;
-
-    constructor(
-        private userService: UserService,
-        ) { }
+    constructor() { }
 
     ngOnInit(): void {
-        this.userService.getUser().subscribe(user => {
-            this.currentUser = user;
-            this.isDataAvailable = true;
-        });
+
     }
 
 }

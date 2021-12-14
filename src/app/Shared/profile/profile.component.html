@@ -1,0 +1,20 @@
+
+<dl *ngIf="isDataAvailable">
+    <dt>Name</dt>
+    <input [(ngModel)]="currentUser.name">
+
+    <dt>Email</dt>
+    <input [(ngModel)]="currentUser.email">
+
+    <dt>Avatar</dt>
+    <dd>{{ currentUser?.avatar }}</dd>
+
+    <dt>Created Date</dt>
+    <dd>{{ currentUser?.createdAt || 'Pendiente' }}</dd>
+
+    <dt>Updated Date</dt>
+    <dd>{{ currentUser?.updatedAt }}</dd>
+
+    <dt>Active</dt>
+    <dd>{{ currentUser?.active }}</dd>
+</dl>

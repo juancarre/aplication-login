@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { JwtInterceptor } from './Core/Helper/jwt.interceptor';
 import { UserAdapter } from './Core/Model/user';
+import { ProfileComponent } from './Shared/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { UserAdapter } from './Core/Model/user';
     RegisterComponent,
     ActivateAccountComponent,
     HomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

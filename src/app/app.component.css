@@ -1,6 +1,7 @@
 
 .router-outlet-container {
   margin-top: 70px;
+  margin-bottom: 30px;
   min-height: 500px;
 }
 

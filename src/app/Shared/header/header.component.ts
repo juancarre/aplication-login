@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../Core/Service/authentication.service';
 import { UserService } from '../../Core/Service/user.service';
+import { UserModel } from '../../Core/Model/user';
 
 @Component({
     selector: 'app-header',
@@ -10,16 +11,32 @@ import { UserService } from '../../Core/Service/user.service';
 })
 export class HeaderComponent implements OnInit {
 
-    userIsLogged: boolean = false;
+    public userIsLogged: boolean = false;
+    public user: any;
+    public isDataAvailable: boolean = false;
 
     constructor(
         private router: Router,
+        private authenticationService: AuthenticationService,
         private userService: UserService,
-        private authenticationService: AuthenticationService
-    ) { }
+    ) {
+        this.authenticationService.getLoggedUser.subscribe(user => {
+            if (user instanceof UserModel) {
+                this.user = user;
+                this.userIsLogged = true;
+            }
+        });
+        
+     }
 
     ngOnInit() {
-
+        this.userService.getUser().subscribe(user => {
+            if (user && user instanceof UserModel) {
+                this.user = user;
+                this.userIsLogged = true;                
+            }
+            this.isDataAvailable = true;
+        });
     }
 
     logout() {

@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { BehaviorSubject, flatMap, map, Observable, tap } from 'rxjs';
 import { UserAdapter, UserModel } from '../Model/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import jwt_decode from "jwt-decode";
 import { UserService } from './user.service';
-import { mergeMap } from 'rxjs-compat/operator/mergeMap';
+
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +14,8 @@ export class AuthenticationService {
 
     private currentUserTokenSubject: BehaviorSubject<{ token: string } | null>;
     public currentUserToken: Observable<{ token: string } | null>;
+
+    @Output() getLoggedUser: EventEmitter<UserModel> = new EventEmitter();
 
     constructor(
         private http: HttpClient,
@@ -47,6 +49,7 @@ export class AuthenticationService {
                 }),
                 tap(user => {
                     this.userService.saveUserOnLocalStorage(user);
+                    this.getLoggedUser.emit(user);
                 })
             );
     }
