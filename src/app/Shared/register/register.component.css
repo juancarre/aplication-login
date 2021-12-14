@@ -32,6 +32,9 @@ h1 {
 .custom-form .invalid-feedback {
     margin-top: -1.25rem;
 }
+.custom-form .checkbox-row {
+    height: 100%;
+}
 .custom-form input {
   /* display: block; */
   margin: 0.1rem 0 1.3rem 0;

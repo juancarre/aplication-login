@@ -1,10 +1,12 @@
 <div class="register container d-flex justify-content-center">
     <form [formGroup]="registerForm" (ngSubmit)="register()" class="custom-form">
         <h1>Registro</h1>
+
         <div class="row">
             <div class="col">
                 <label for="name">Name <span class="required-field">*</span></label>
-                <input id="name" type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" placeholder="Name" required />
+                <input id="name" type="text" formControlName="name"
+                    [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" placeholder="Name" required />
                 <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
                     <div *ngIf="f['name'].errors['required']">
                         Name is required
@@ -13,9 +15,18 @@
                         Minimun of 6 chars length is required
                     </div>
                 </div>
+            </div>
+            <div class="col">
+                <label for="companyName">Company name</label>
+                <input id="companyName" type="text" formControlName="companyName" placeholder="Company name" required />
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col">
                 <label for="email">Email <span class="required-field">*</span></label>
-                <input id="email" type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" placeholder="Email" required />
+                <input id="email" type="email" formControlName="email"
+                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" placeholder="Email" required />
                 <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                     <div *ngIf="f['email'].errors['required']">
                         Email is required
@@ -27,9 +38,25 @@
                         Email format is required
                     </div>
                 </div>
+            </div>
+            <div class="col">
+                <label for="phone">Phone number</label>
+                <input id="phone" type="text" formControlName="phone"
+                    [ngClass]="{ 'is-invalid': f['phone'].value.length > 0 && f['phone'].errors }"
+                    placeholder="Phone number" required />
+                <div *ngIf="f['phone'].value.length > 0 && f['phone'].errors" class="invalid-feedback">
+                    <div *ngIf="f['phone'].errors['pattern']">
+                        Just numbers, "+" and spaces are allow
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col">
                 <label for="password">Password <span class="required-field">*</span></label>
-                <input id="password" type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" placeholder="Password" />
+                <input id="password" type="password" formControlName="password"
+                    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" placeholder="Password" />
                 <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
                     <div *ngIf="f['password'].errors['required']">
                         Password is required
@@ -38,9 +65,26 @@
                         Minimun of 6 chars length is required
                     </div>
                 </div>
+            </div>
+            <div class="col">
+                <label for="companyWeb">Company web</label>
+                <input id="companyWeb" type="text" formControlName="companyWeb"
+                    [ngClass]="{ 'is-invalid': f['companyWeb'].value.length > 0 && f['companyWeb'].errors }"
+                    placeholder="Company web" required />
+                <div *ngIf="f['companyWeb'].value.length > 0 && f['companyWeb'].errors" class="invalid-feedback">
+                    <div *ngIf="f['companyWeb'].errors['email']">
+                        Just web format is allow
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col">
                 <label for="confirmPassword">Confirm password <span class="required-field">*</span></label>
-                <input id="confirmPassword" type="password" [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }" formControlName="confirmPassword" placeholder="Confirm password" />
+                <input id="confirmPassword" type="password"
+                    [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+                    formControlName="confirmPassword" placeholder="Confirm password" />
                 <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
                     <div *ngIf="f['confirmPassword'].errors['required']">
                         Confirm password is required
@@ -51,24 +95,20 @@
                 </div>
             </div>
             <div class="col">
-                <label for="companyName">Company name</label>
-                <input id="companyName" type="text" formControlName="companyName" placeholder="Company name" required />
-
-                <label for="phone">Phone number</label>
-                <input id="phone" type="text" formControlName="phone" [ngClass]="{ 'is-invalid': f['phone'].value.length > 0 && f['phone'].errors }" placeholder="Phone number" required />
-                <div *ngIf="f['phone'].value.length > 0 && f['phone'].errors" class="invalid-feedback">
-                    <div *ngIf="f['phone'].errors['pattern']">
-                        Just numbers, "+" and spaces are allow
+                <mat-radio-group formControlName="radioTypeUser">
+                    <div class="row checkbox-row">
+                        <div class="col d-flex align-items-center">
+                            <mat-radio-button class="example-margin" color="primary" (change)="radioChange('person')">
+                                I´m a person
+                            </mat-radio-button>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <mat-radio-button class="example-margin" color="primary" (change)="radioChange('company')">
+                                I´m a company
+                            </mat-radio-button>
+                        </div>
                     </div>
-                </div>
-
-                <label for="companyWeb">Company web</label>
-                <input id="companyWeb" type="text" formControlName="companyWeb" [ngClass]="{ 'is-invalid': f['companyWeb'].value.length > 0 && f['companyWeb'].errors }" placeholder="Company web" required />
-                <div *ngIf="f['companyWeb'].value.length > 0 && f['companyWeb'].errors" class="invalid-feedback">
-                    <div *ngIf="f['companyWeb'].errors['email']">
-                        Just web format is allow
-                    </div>
-                </div>
+                </mat-radio-group>
             </div>
         </div>
 

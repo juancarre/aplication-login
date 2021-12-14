@@ -15,6 +15,7 @@ import { HomeComponent } from './Shared/home/home.component';
 import { ErrorInterceptor } from './Core/Helper/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatRadioModule } from '@angular/material/radio';
 import { JwtInterceptor } from './Core/Helper/jwt.interceptor';
 import { UserAdapter } from './Core/Model/user';
 import { ProfileComponent } from './Shared/profile/profile.component';
@@ -38,7 +39,8 @@ import { ProfileComponent } from './Shared/profile/profile.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatRadioModule
   ],
   providers: [
       UserAdapter,
