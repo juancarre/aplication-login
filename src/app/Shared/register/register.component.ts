@@ -1,9 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../Core/Service/user.service";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Validation from '../utils/validation';
-import { MatRadioChange } from '@angular/material/radio';
 
 @Component({
     selector: "app-register",
@@ -14,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
     registerForm: FormGroup;
     submitted: boolean = false;
-    typeUser?: string;
+    userType?: string;
 
 
     constructor(
@@ -38,7 +37,7 @@ export class RegisterComponent implements OnInit {
                 Validators.required,
             ]),
             companyName: new FormControl(''),
-            phone: new FormControl('', [
+            phoneNumber: new FormControl('', [
                 Validators.pattern("^[+ 0-9]*$")
             ]),
             companyWeb: new FormControl('', [
@@ -60,8 +59,9 @@ export class RegisterComponent implements OnInit {
         return this.registerForm.controls;
     }
 
-    radioChange(typeUser: string) {
-        this.typeUser = typeUser;
+    //Aplico el valor seleccionado del radio button a una variable 
+    radioChange(userType: string) {
+        this.userType = userType;
     }
 
     register() {
@@ -70,17 +70,30 @@ export class RegisterComponent implements OnInit {
 
         if (this.registerForm.invalid) {
             console.log(JSON.stringify(this.registerForm.value, null, 2));
+            
             return;
         }
+        
 
-        console.log(JSON.stringify(this.registerForm.value, null, 2));
+        if (this.registerForm.valid) {
+            
+            let newUser = this.registerForm.value;
 
+            // Elimino los campos que no son obligatorios y vienen vacios
+            for (let key in newUser) {
+                let value = newUser[key];
+                if (!value || value === ''){
+                    delete newUser[key];
+                }
+            }
 
-        // const userForRegister = { name: this.name, email: this.email, password: this.password };
-
-        // this.userService.register(userForRegister).subscribe(data => {
-        //     console.log(data);
-        // });
+            // Añado el valor del radio button en caso de que se haya cumplimentado
+            if(this.userType !== undefined) {
+                Object.assign(newUser, {userType: this.userType});
+            }
+            
+            this.userService.register(newUser).subscribe();
+        }
 
         // console.log(this.name);
         // console.log(this.email);

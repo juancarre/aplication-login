@@ -18,7 +18,7 @@
             </div>
             <div class="col">
                 <label for="companyName">Company name</label>
-                <input id="companyName" type="text" formControlName="companyName" placeholder="Company name" required />
+                <input id="companyName" type="text" formControlName="companyName" placeholder="Company name" />
             </div>
         </div>
 
@@ -40,12 +40,12 @@
                 </div>
             </div>
             <div class="col">
-                <label for="phone">Phone number</label>
-                <input id="phone" type="text" formControlName="phone"
-                    [ngClass]="{ 'is-invalid': f['phone'].value.length > 0 && f['phone'].errors }"
-                    placeholder="Phone number" required />
-                <div *ngIf="f['phone'].value.length > 0 && f['phone'].errors" class="invalid-feedback">
-                    <div *ngIf="f['phone'].errors['pattern']">
+                <label for="phoneNumber">Phone number</label>
+                <input id="phoneNumber" type="text" formControlName="phoneNumber"
+                    [ngClass]="{ 'is-invalid': f['phoneNumber'].value.length > 0 && f['phoneNumber'].errors }"
+                    placeholder="Phone number" />
+                <div *ngIf="f['phoneNumber'].value.length > 0 && f['phoneNumber'].errors" class="invalid-feedback">
+                    <div *ngIf="f['phoneNumber'].errors['pattern']">
                         Just numbers, "+" and spaces are allow
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 <label for="companyWeb">Company web</label>
                 <input id="companyWeb" type="text" formControlName="companyWeb"
                     [ngClass]="{ 'is-invalid': f['companyWeb'].value.length > 0 && f['companyWeb'].errors }"
-                    placeholder="Company web" required />
+                    placeholder="Company web" />
                 <div *ngIf="f['companyWeb'].value.length > 0 && f['companyWeb'].errors" class="invalid-feedback">
                     <div *ngIf="f['companyWeb'].errors['email']">
                         Just web format is allow
@@ -112,6 +112,6 @@
             </div>
         </div>
 
-        <button type="submit" (click)="register()">Register</button>
+        <button type="submit">Register</button>
     </form>
 </div>
