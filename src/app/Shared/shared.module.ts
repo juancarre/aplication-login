@@ -9,6 +9,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
+import { PortfolioItemComponent } from './home/portfolio-item/portfolio-item.component';
 
 
 
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
         ActivateAccountComponent,
         HomeComponent,
         ProfileComponent,
+        PortfolioItemComponent,
     ],
     imports: [
         CommonModule,

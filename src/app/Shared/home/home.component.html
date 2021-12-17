@@ -7,63 +7,39 @@
         <div class="row">
             <div class="col-sm-6 mb-4">
                 <!-- Portfolio item 1-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Threads</div>
-                        <div class="portfolio-caption-subheading text-muted">Illustration</div>
-                    </div>
-                </div>
+                <app-portfolio-item 
+                    [src]="'assets/img/portfolio/1.jpg'"
+                    [title]="'Titulo'"
+                    [subtitle]="'Illustration'"
+                    [modalLink]="'#portfolioModal1'">
+                </app-portfolio-item>
             </div>
             <div class="col-sm-6 mb-4">
-                <!-- Portfolio item 2-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/2.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Explore</div>
-                        <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
-                    </div>
-                </div>
+                <!-- Portfolio item 1-->
+                <app-portfolio-item 
+                    [src]="'assets/img/portfolio/2.jpg'"
+                    [title]="'Titulo'"
+                    [subtitle]="'Illustration'"
+                    [modalLink]="'#portfolioModal2'">
+                </app-portfolio-item>
             </div>
             <div class="col-sm-6 mb-4">
-                <!-- Portfolio item 3-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/3.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Finish</div>
-                        <div class="portfolio-caption-subheading text-muted">Identity</div>
-                    </div>
-                </div>
+                <!-- Portfolio item 1-->
+                <app-portfolio-item 
+                    [src]="'assets/img/portfolio/3.jpg'"
+                    [title]="'Titulo'"
+                    [subtitle]="'Illustration'"
+                    [modalLink]="'#portfolioModal3'">
+                </app-portfolio-item>
             </div>
-            <div class="col-sm-6 mb-4 mb-lg-0">
-                <!-- Portfolio item 4-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/4.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Lines</div>
-                        <div class="portfolio-caption-subheading text-muted">Branding</div>
-                    </div>
-                </div>
+            <div class="col-sm-6 mb-4">
+                <!-- Portfolio item 1-->
+                <app-portfolio-item 
+                    [src]="'assets/img/portfolio/4.jpg'"
+                    [title]="'Titulo'"
+                    [subtitle]="'Illustration'"
+                    [modalLink]="'#portfolioModal4'">
+                </app-portfolio-item>
             </div>
         </div>
         <!-- Portfolio Modals-->
