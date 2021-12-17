@@ -1,4 +1,4 @@
-<div class="register container d-flex justify-content-center">
+<div class="container register-container d-flex justify-content-center">
     <form [formGroup]="registerForm" (ngSubmit)="register()" class="custom-form">
         <h1>Registro</h1>
 
@@ -112,6 +112,15 @@
             </div>
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" class="btn btn-dark">
+            <div class="spinner" *ngIf="loading; else userloggedOut">
+                <div class="spinner-border spinner-border-sm text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <ng-template #userloggedOut>
+                Register
+            </ng-template>
+        </button>
     </form>
 </div>

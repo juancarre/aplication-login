@@ -10,6 +10,9 @@ h1 {
   margin: 0;
   padding: 0;
 }
+.register-container {
+    padding-top: 2rem;
+}
 .custom-form {
   min-width: 300px;
   max-width: 60%;
@@ -54,7 +57,6 @@ h1 {
   font-size: 0.875rem;
   color: #ffffff;
   font-weight: bold;
-  background-color: #bcd8c1;
   width: 100%;
   display: block;
   padding: 0.875rem 1rem;

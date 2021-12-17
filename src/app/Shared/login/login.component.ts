@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserModel } from 'src/app/core/Model/user';
 import { AuthenticationService } from 'src/app/core/Service/authentication.service';
+import { catchError } from 'rxjs';
 
 @Component({
 	selector: 'app-login',
@@ -12,8 +13,8 @@ export class LoginComponent implements OnInit {
 
 	loading: boolean = false;
 	submitted: boolean = false;
-	email: string = '';
-	password: string = '';
+	emailInput: string = '';
+	passwordInput: string = '';
 	returnUrl: string = '/'
 	error: string = '';
 
@@ -28,14 +29,20 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
-        this.authenticationService.login(this.email, this.password)
-            .subscribe(
-                (user: UserModel) => {
+        this.loading = true;
+        this.authenticationService.login(this.emailInput, this.passwordInput)
+            .subscribe({
+                next: (user: UserModel) => {
                     if (user.id !== undefined){
                         this.router.navigate([this.returnUrl]);
                     }
-                }
-            );
+                    this.loading = false;
+                },
+                error:(e) => {
+                    console.log(e);
+                    this.loading = false;
+                },
+            });
 	}
 
 }

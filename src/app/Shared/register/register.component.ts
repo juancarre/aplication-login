@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/Service/user.service';
 import Validation from 'src/app/core/utils/validation';
 
@@ -15,11 +16,13 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     submitted: boolean = false;
     userType?: string;
+    loading: boolean = false;
 
 
     constructor(
         public userService: UserService,
         private fb: FormBuilder,
+        private router: Router
     ) {
         this.registerForm = this.fb.group({
             name: new FormControl('', [
@@ -67,8 +70,10 @@ export class RegisterComponent implements OnInit {
 
     register() {
         this.submitted = true;
+        this.loading = true;
 
         if (this.registerForm.invalid) {
+            this.loading = false;
             return;
         }
         
@@ -89,7 +94,15 @@ export class RegisterComponent implements OnInit {
                 Object.assign(newUser, {userType: this.userType});
             }
             
-            this.userService.register(newUser).subscribe();
+            this.userService.register(newUser).subscribe({
+                next: () => {
+                    this.loading = false;
+                    this.router.navigate(['/login']);
+                },
+                error: () => {
+                    this.loading = false;
+                }
+            });
         }
     }
 }
