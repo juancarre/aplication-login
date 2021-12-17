@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {LoginComponent} from "./Shared/login/login.component";
-import {RegisterComponent} from "./Shared/register/register.component";
-import {ActivateAccountComponent} from "./Shared/activate-account/activate-account.component";
-import { AuthGuard } from './Core/Helper/auth.guard';
-import { HomeComponent } from './Shared/home/home.component';
-import { ProfileComponent } from './Shared/profile/profile.component';
+import { AuthGuard } from './core/Helper/auth.guard';
+import { ActivateAccountComponent } from './shared/activate-account/activate-account.component';
+import { HomeComponent } from './shared/home/home.component';
+import { LoginComponent } from './shared/login/login.component';
+import { ProfileComponent } from './shared/profile/profile.component';
+import { RegisterComponent } from './shared/register/register.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},

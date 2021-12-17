@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/Core/Service/user.service';
+import { UserModel } from 'src/app/core/Model/user';
+import { UserService } from 'src/app/core/Service/user.service';
 
 @Component({
     selector: 'app-profile',
@@ -8,7 +9,7 @@ import { UserService } from 'src/app/Core/Service/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-    currentUser: any;
+    currentUser?: UserModel;
     isDataAvailable: boolean = false;
 
     constructor(
@@ -17,8 +18,10 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit(): void {
         this.userService.getUser().subscribe(user => {
-            this.currentUser = user;
-            this.isDataAvailable = true;
+            if (user instanceof UserModel) {
+                this.currentUser = user;
+                this.isDataAvailable = true;
+            }
         });
     }
 

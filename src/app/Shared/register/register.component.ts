@@ -1,8 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../Core/Service/user.service";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import Validation from '../utils/validation';
+import { UserService } from 'src/app/core/Service/user.service';
+import Validation from 'src/app/core/utils/validation';
+
 
 @Component({
     selector: "app-register",
@@ -65,16 +66,12 @@ export class RegisterComponent implements OnInit {
     }
 
     register() {
-
         this.submitted = true;
 
         if (this.registerForm.invalid) {
-            console.log(JSON.stringify(this.registerForm.value, null, 2));
-            
             return;
         }
         
-
         if (this.registerForm.valid) {
             
             let newUser = this.registerForm.value;
@@ -94,9 +91,5 @@ export class RegisterComponent implements OnInit {
             
             this.userService.register(newUser).subscribe();
         }
-
-        // console.log(this.name);
-        // console.log(this.email);
-        // console.log(this.password);
     }
 }

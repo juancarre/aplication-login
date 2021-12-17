@@ -11,8 +11,7 @@ h1 {
   padding: 0;
 }
 .custom-form {
-  min-width: 300px;
-  max-width: 60%;
+  width: 100%;
   /*margin: 0px auto;*/
   background: rgba(255, 255, 255, 0.15);
   padding: 2rem 3rem;
@@ -23,9 +22,12 @@ h1 {
   color: black;
   /*margin-top: 10rem;*/
 }
+.custom-form h1 {
+    margin-bottom: 1rem;
+}
 .custom-form input {
   display: block;
-  margin: 2rem 0;
+  margin: 0.1rem 0 1.3rem 0;
   width: 100%;
   border-radius: 0.5rem;
   padding: 1rem;

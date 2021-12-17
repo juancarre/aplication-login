@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {UserService} from "../../Core/Service/user.service";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from 'src/app/core/Service/user.service';
+
 
 @Component({
   selector: 'app-activate-account',
@@ -18,9 +18,7 @@ export class ActivateAccountComponent {
     const url: string = 'http://localhost:250/api/v1/users/' + this.user_id + '/' + 'activate';
     const payload: object = {token: this.token};
 
-    this.userService.activateAccount(payload, url).subscribe(data => {
-      console.log(data);
-    });
+    this.userService.activateAccount(payload, url).subscribe();
 
   }
 }

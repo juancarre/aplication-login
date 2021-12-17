@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../Core/Service/authentication.service';
-import { UserService } from '../../Core/Service/user.service';
-import { UserModel } from '../../Core/Model/user';
+import { UserModel } from 'src/app/core/Model/user';
+import { AuthenticationService } from 'src/app/core/Service/authentication.service';
+import { DataSharingService } from 'src/app/core/Service/data-sharing.service';
+import { UserService } from 'src/app/core/Service/user.service';
 
 @Component({
     selector: 'app-header',
@@ -19,23 +20,20 @@ export class HeaderComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService,
         private userService: UserService,
+        private dataSharingService: DataSharingService
     ) {
-        this.authenticationService.getLoggedUser.subscribe(user => {
-            if (user instanceof UserModel) {
-                this.user = user;
-                this.userIsLogged = true;
-            }
-        });
-        
-     }
+        this.dataSharingService.isUserLoggedIn.subscribe(value => {
+            this.userIsLogged = value;
+        })
+    }
 
     ngOnInit() {
         this.userService.getUser().subscribe(user => {
-            if (user && user instanceof UserModel) {
-                this.user = user;
-                this.userIsLogged = true;                
+            if (user instanceof UserModel) {
+                this.dataSharingService.isUserLoggedIn.next(true);
+            } else {
+                this.dataSharingService.isUserLoggedIn.next(false);
             }
-            this.isDataAvailable = true;
         });
     }
 

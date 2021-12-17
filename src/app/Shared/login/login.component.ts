@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { AuthenticationService } from '../../Core/Service/authentication.service';
-import { first, tap } from 'rxjs';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserModel } from '../../Core/Model/user';
-import { UserService } from '../../Core/Service/user.service';
+import { UserModel } from 'src/app/core/Model/user';
+import { AuthenticationService } from 'src/app/core/Service/authentication.service';
 
 @Component({
 	selector: 'app-login',
@@ -23,7 +20,6 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private authenticationService: AuthenticationService,
-        private userService: UserService, 
 		public router: Router
 	) { }
 

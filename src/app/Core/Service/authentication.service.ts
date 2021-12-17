@@ -1,10 +1,11 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, flatMap, map, Observable, tap } from 'rxjs';
-import { UserAdapter, UserModel } from '../Model/user';
+import { UserAdapter } from '../Model/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import jwt_decode from "jwt-decode";
 import { UserService } from './user.service';
+import { DataSharingService } from './data-sharing.service';
 
 
 @Injectable({
@@ -15,12 +16,11 @@ export class AuthenticationService {
     private currentUserTokenSubject: BehaviorSubject<{ token: string } | null>;
     public currentUserToken: Observable<{ token: string } | null>;
 
-    @Output() getLoggedUser: EventEmitter<UserModel> = new EventEmitter();
-
     constructor(
         private http: HttpClient,
         private userService: UserService,
-        private userAdapter: UserAdapter
+        private userAdapter: UserAdapter,
+        private dataSharingService: DataSharingService
     ) {
         this.currentUserTokenSubject = new BehaviorSubject<{ token: string } | null>(JSON.parse(localStorage.getItem('currentToken')!));
         this.currentUserToken = this.currentUserTokenSubject.asObservable();
@@ -49,7 +49,7 @@ export class AuthenticationService {
                 }),
                 tap(user => {
                     this.userService.saveUserOnLocalStorage(user);
-                    this.getLoggedUser.emit(user);
+                    this.dataSharingService.isUserLoggedIn.next(true);
                 })
             );
     }
@@ -57,6 +57,9 @@ export class AuthenticationService {
     logout() {
         localStorage.removeItem('currentToken');
         this.currentUserTokenSubject.next(null);
+
+        this.dataSharingService.isUserLoggedIn.next(false);
+        
         this.userService.logoutUser();
     }
 

@@ -6,6 +6,10 @@ export interface UserInterface {
     	email: string;
 		avatar: string;
 		active: boolean;
+        companyName: string;
+        phoneNumber: string;
+        companyWeb: string;
+        userType: string;
 		createdAt: Date;
 		updatedAt: Date;
 	}
@@ -17,6 +21,10 @@ export class UserModel implements UserInterface {
 		public email: string, 
 		public avatar: string,
 		public active: boolean,
+        public companyName: string,
+        public phoneNumber: string,
+        public companyWeb: string,
+        public userType: string,
 		public createdAt: Date,
 		public updatedAt: Date,
 	) {}
@@ -30,6 +38,10 @@ export class UserAdapter implements Adapter<UserModel> {
             item.email,
             item.avatar,
             item.active,
+            item.companyName,
+            item.phoneNumber,
+            item.companyWeb,
+            item.userType,
             item.createdAt,
             item.updatedAt
         );
