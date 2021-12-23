@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { PortfolioItemComponent } from './home/portfolio-item/portfolio-item.component';
+import { AboutMeModule } from './about-me/about-me.module';
 
 
 
@@ -29,6 +30,7 @@ import { PortfolioItemComponent } from './home/portfolio-item/portfolio-item.com
         FormsModule,
         ReactiveFormsModule,
         FontAwesomeModule,
+        AboutMeModule
     ],
     exports: []
 })

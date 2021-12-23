@@ -29,8 +29,10 @@
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
     "ngx-cookie-service": "^13.0.1",
+    "ngx-useful-swiper": "^10.0.1",
     "rxjs": "~7.4.0",
     "rxjs-compat": "^6.6.7",
+    "swiper": "^6.8.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
