@@ -17,6 +17,27 @@
 					<a class="nav-link" routerLink="/activate_user">Activate User</a>
 				</li>
                 <li class="nav-item" [ngClass]="!userIsLogged ? 'd-none' : ''">
+					<a class="nav-link" routerLink="/contact">Contacto</a>
+				</li>
+
+                <button #button mat-button
+                    routerLink="/about-me"
+                    [matMenuTriggerFor]="levelOne" 
+                    #levelOneTrigger="matMenuTrigger"
+                    (mouseenter)="buttonEnter(levelOneTrigger)" 
+                    (mouseleave)="buttonLeave(levelOneTrigger, button)" 
+                    style="z-index:1050"
+                    [ngClass]="!userIsLogged ? 'd-none' : ''" class="dropdownMenuButton">
+                    About me
+                </button>
+                <mat-menu #levelOne="matMenu" direction="down" yPosition="below">
+                    <span (mouseenter)="menuenter()" (mouseleave)="menuLeave(levelOneTrigger, button)">
+                        <button mat-menu-item (click)="linkAboutMe('education')">Education</button>
+                        <button mat-menu-item (click)="linkAboutMe('experience')">Profesional Experience</button>
+                    </span>
+                  </mat-menu>
+
+                <li class="nav-item" [ngClass]="!userIsLogged ? 'd-none' : ''">
 					<a class="nav-link" routerLink="/profile">My profile</a>
 				</li>
 				<li class="nav-item" [ngClass]="!userIsLogged ? 'd-none' : ''">

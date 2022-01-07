@@ -39,4 +39,31 @@
     #mainNav .navbar-nav .nav-item:last-child {
       margin-right: 0;
     }
+    #mainNav .navbar-nav button {
+        background-color: rgba(var(--bs-black-rgb),var(--bs-bg-opacity)) !important;
+    }
+    ::ng-deep .mat-menu-panel {
+        background-color: black;
+    }
+    ::ng-deep .mat-menu-panel button {
+        color: rgba(255,255,255,.55);
+    }
+    #mainNav .navbar-nav .dropdownMenuButton {
+        color: rgba(255,255,255,.55);
+        margin-right: 1rem;
+        border: 0;
+        font-size: 1.25em;
+        transition: font-size 0.3s ease-in-out;
+        outline: none;
+    }
+    #mainNav.navbar-shrink .dropdownMenuButton {
+        color: rgba(255,255,255,.55);
+        margin-right: 1rem;
+        border: 0;
+        font-size: 1em !important;
+    }
+    #mainNav .navbar-nav .dropdownMenuButton:hover,
+    ::ng-deep .mat-menu-panel button:hover {
+        color: rgba(255,255,255,.75) !important;
+    }
   }

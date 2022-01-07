@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, HostListener, OnInit, Renderer2 } from '@angular/core';
-import { Router, Scroll } from '@angular/router';
+import { Router, RouterLink, Scroll } from '@angular/router';
 import { UserModel } from 'src/app/core/Model/user';
 import { AuthenticationService } from 'src/app/core/Service/authentication.service';
 import { DataSharingService } from 'src/app/core/Service/data-sharing.service';
@@ -15,6 +15,11 @@ export class HeaderComponent implements OnInit, AfterContentInit {
     public userIsLogged: boolean = false;
     public user: any;
     public isDataAvailable: boolean = false;
+
+    public isMatMenuOpen = false;
+    public isMatMenu2Open = false;
+    public enteredButton = false;
+    public prevButtonTrigger: any;
 
     constructor(
         private router: Router,
@@ -49,7 +54,71 @@ export class HeaderComponent implements OnInit, AfterContentInit {
             }
         })
     }
-    
+
+    linkAboutMe($optionRequired: string) {
+        this.router.navigate(['/about-me/' + $optionRequired])
+    }
+
+    menuenter() {
+        this.isMatMenuOpen = true;
+        if (this.isMatMenu2Open) {
+            this.isMatMenu2Open = false;
+        }
+    }
+
+    menuLeave(trigger: any, button: any) {
+        setTimeout(() => {
+            if (!this.isMatMenu2Open && !this.enteredButton) {
+                this.isMatMenuOpen = false;
+                trigger.closeMenu();
+                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
+                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
+            } else {
+                this.isMatMenuOpen = false;
+            }
+        }, 80)
+    }
+
+    buttonEnter(trigger: any) {
+        setTimeout(() => {
+            if (this.prevButtonTrigger && this.prevButtonTrigger != trigger) {
+                this.prevButtonTrigger.closeMenu();
+                this.prevButtonTrigger = trigger;
+                this.isMatMenuOpen = false;
+                this.isMatMenu2Open = false;
+                trigger.openMenu();
+                this.renderer.removeClass(trigger.menu.items.first['_elementRef'].nativeElement, 'cdk-focused');
+                this.renderer.removeClass(trigger.menu.items.first['_elementRef'].nativeElement, 'cdk-program-focused');
+            }
+            else if (!this.isMatMenuOpen) {
+                this.enteredButton = true;
+                this.prevButtonTrigger = trigger
+                trigger.openMenu();
+                this.renderer.removeClass(trigger.menu.items.first['_elementRef'].nativeElement, 'cdk-focused');
+                this.renderer.removeClass(trigger.menu.items.first['_elementRef'].nativeElement, 'cdk-program-focused');
+            }
+            else {
+                this.enteredButton = true;
+                this.prevButtonTrigger = trigger
+            }
+        })
+    }
+
+    buttonLeave(trigger: any, button: any) {
+        setTimeout(() => {
+            if (this.enteredButton && !this.isMatMenuOpen) {
+                trigger.closeMenu();
+                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
+                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
+            } if (!this.isMatMenuOpen) {
+                trigger.closeMenu();
+                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
+                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
+            } else {
+                this.enteredButton = false;
+            }
+        }, 100)
+    }
 
     logout() {
         this.authenticationService.logout();

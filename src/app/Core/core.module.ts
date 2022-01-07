@@ -15,6 +15,7 @@ import localeEs from '@angular/common/locales/es';
 import {registerLocaleData} from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 registerLocaleData(localeEs, 'es');
@@ -32,7 +33,8 @@ registerLocaleData(localeEs, 'es');
         RouterModule,
         BrowserAnimationsModule,
         MatSnackBarModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        MatMenuModule
     ],
     providers: [
         DataSharingService,

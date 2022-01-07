@@ -1,0 +1,7 @@
+section#contact {
+    background-color: #212529;
+    background-image: url("/assets/img/contact/contact_background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 33rem;
+  }

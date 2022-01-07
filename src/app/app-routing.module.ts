@@ -12,6 +12,7 @@ import { EducationComponent } from './shared/about-me/education/education.compon
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'about-me', loadChildren: () => import('./shared/about-me/about-me.module').then(m => m.AboutMeModule) },
+    { path: 'contact', loadChildren: () => import('./shared/contact/contact.module').then(m => m.ContactModule) },
     { path: 'login', component: LoginComponent, pathMatch: 'full' },
     { path: 'register', component: RegisterComponent, pathMatch: 'full' },
     { path: 'activate_user', component: ActivateAccountComponent, pathMatch: 'full' },
