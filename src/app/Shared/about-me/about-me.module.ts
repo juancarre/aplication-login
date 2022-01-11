@@ -18,10 +18,6 @@ import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
     CommonModule,
     AboutMeRoutingModule,
     NgxUsefulSwiperModule,
-  ],
-  exports: [
-      EducationComponent,
-      WorkExperienceComponent
   ]
 })
 export class AboutMeModule { }

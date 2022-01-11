@@ -71,8 +71,6 @@ export class HeaderComponent implements OnInit, AfterContentInit {
             if (!this.isMatMenu2Open && !this.enteredButton) {
                 this.isMatMenuOpen = false;
                 trigger.closeMenu();
-                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
-                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
             } else {
                 this.isMatMenuOpen = false;
             }
@@ -87,15 +85,11 @@ export class HeaderComponent implements OnInit, AfterContentInit {
                 this.isMatMenuOpen = false;
                 this.isMatMenu2Open = false;
                 trigger.openMenu();
-                this.renderer.removeClass(trigger.menu.items.first['_elementRef'].nativeElement, 'cdk-focused');
-                this.renderer.removeClass(trigger.menu.items.first['_elementRef'].nativeElement, 'cdk-program-focused');
             }
             else if (!this.isMatMenuOpen) {
                 this.enteredButton = true;
                 this.prevButtonTrigger = trigger
                 trigger.openMenu();
-                this.renderer.removeClass(trigger.menu.items.first['_elementRef'].nativeElement, 'cdk-focused');
-                this.renderer.removeClass(trigger.menu.items.first['_elementRef'].nativeElement, 'cdk-program-focused');
             }
             else {
                 this.enteredButton = true;
@@ -108,12 +102,8 @@ export class HeaderComponent implements OnInit, AfterContentInit {
         setTimeout(() => {
             if (this.enteredButton && !this.isMatMenuOpen) {
                 trigger.closeMenu();
-                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
-                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
             } if (!this.isMatMenuOpen) {
                 trigger.closeMenu();
-                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
-                this.renderer.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
             } else {
                 this.enteredButton = false;
             }

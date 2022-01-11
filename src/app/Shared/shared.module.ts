@@ -5,13 +5,15 @@ import { RegisterComponent } from './register/register.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { PortfolioItemComponent } from './home/portfolio-item/portfolio-item.component';
 import { AboutMeModule } from './about-me/about-me.module';
 import { ContactModule } from './contact/contact.module';
+
+import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -32,8 +34,9 @@ import { ContactModule } from './contact/contact.module';
         ReactiveFormsModule,
         FontAwesomeModule,
         AboutMeModule,
-        ContactModule
+        ContactModule,
+        MatFormFieldModule
     ],
-    exports: []
+    exports: [MatFormFieldModule]
 })
 export class SharedModule { }

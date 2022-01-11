@@ -9,16 +9,24 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 export class BasicFormComponent implements OnInit {
 
     basicContactForm: FormGroup;
+    colorControl = new FormControl('primary');
+    fontSizeControl = new FormControl(16, Validators.min(10));
 
     constructor(
         private fb: FormBuilder
     ) {
         this.basicContactForm = this.fb.group({
+            color: this.colorControl,
+            fontSize: this.fontSizeControl,
             email: new FormControl('', [
                 Validators.required,
                 Validators.minLength(6)
             ]),
             phone: new FormControl('', [
+                Validators.required,
+                Validators.minLength(6)
+            ]),
+            motivo: new FormControl('', [
                 Validators.required,
                 Validators.minLength(6)
             ]),
