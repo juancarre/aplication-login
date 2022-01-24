@@ -1,27 +1,23 @@
-
-<div class="container contact-container">
-    <div class="text-center">
-        <h2 class="header text-uppercase">Contact Us</h2>
-    </div>
-    <form id="contactForm" data-sb-form-api-token="API_TOKEN" [style.fontSize.px]="14">
+<div class="container">
+    <form [formGroup]="basicContactForm" id="basicContactForm" data-sb-form-api-token="API_TOKEN"
+        [style.fontSize.px]="14">
         <div class="row align-items-stretch mb-5">
             <div class="col-md-6">
                 <div class="form-group card basic-form-card">
-                    <!-- Name input-->
                     <mat-form-field appearance="fill">
                         <mat-label>Enter your email</mat-label>
                         <input required formControlName="email" matInput required placeholder="ejemplo@email.com">
-                        <mat-error *ngIf="f['email'].invalid">{{getErrorMessage()}}</mat-error>
-                      </mat-form-field>
+                        <mat-error *ngIf="f['email'].invalid">{{getErrorMessage('email')}}</mat-error>
+                    </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Enter your phone</mat-label>
-                        <input required formControlName="phone" matInput placeholder="+34 606 666 666" >
-                        <mat-error *ngIf="f['phone'].invalid">{{getErrorMessage()}}</mat-error>
+                        <input required formControlName="phone" matInput placeholder="+34 606 666 666">
+                        <mat-error *ngIf="f['phone'].invalid">{{getErrorMessage('phone')}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>What is the reason of your request</mat-label>
-                        <input required formControlName="motivo" matInput placeholder="Breve título de su interés">
-                        <mat-error *ngIf="f['phone'].invalid">{{getErrorMessage()}}</mat-error>
+                        <input required formControlName="reason" matInput placeholder="Breve título de su interés">
+                        <mat-error *ngIf="f['reason'].invalid">{{getErrorMessage('reason')}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -29,8 +25,10 @@
                 <div class="form-group form-group-textarea mb-md-0 card basic-form-card h100">
                     <mat-form-field appearance="fill" style="height: 100%;">
                         <mat-label>Live your message</mat-label>
-                        <textarea matInput placeholder="pat@example.com" formControlName="message" style="height: 100%;" required></textarea>
-                        <mat-error *ngIf="f['email'].invalid">{{getErrorMessage()}}</mat-error>
+                        <textarea matInput placeholder="pat@example.com" formControlName="message"
+                            style="height: 100%;">
+                        </textarea>
+
                     </mat-form-field>
                 </div>
             </div>

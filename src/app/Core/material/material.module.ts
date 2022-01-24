@@ -7,6 +7,13 @@ import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/mat
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -20,7 +27,14 @@ import { MatCardModule } from '@angular/material/card';
         MatInputModule,
         MatSelectModule,
         MatMenuModule,
-        MatCardModule
+        MatCardModule,
+        MatRadioModule,
+        NgxMatTimepickerModule,
+        MatToolbarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCheckboxModule,
+        MatButtonModule
     ],
     exports: [
         MatMenuModule,
@@ -29,10 +43,17 @@ import { MatCardModule } from '@angular/material/card';
         MatInputModule,
         MatSelectModule,
         MatMenuModule,
-        MatCardModule
+        MatCardModule,
+        MatRadioModule,
+        NgxMatTimepickerModule,
+        MatToolbarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCheckboxModule,
+        MatButtonModule
     ],
     providers: [
-        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
-      ]
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }
+    ]
 })
 export class MaterialModule { }

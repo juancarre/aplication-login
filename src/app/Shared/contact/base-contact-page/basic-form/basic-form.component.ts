@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,44 +12,67 @@ export class BasicFormComponent implements OnInit {
     colorControl = new FormControl('primary');
     fontSizeControl = new FormControl(16, Validators.min(10));
 
+    @Output() basicFormEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() saveFormEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Input() basicContactFormSaved: any;
+
     constructor(
         private fb: FormBuilder
     ) {
         this.basicContactForm = this.fb.group({
-            color: this.colorControl,
-            fontSize: this.fontSizeControl,
             email: new FormControl('', [
                 Validators.required,
-                Validators.minLength(6)
+                Validators.minLength(6),
+                Validators.email
             ]),
             phone: new FormControl('', [
                 Validators.required,
-                Validators.minLength(6)
+                Validators.minLength(6),
+                Validators.pattern("^[+ 0-9]*$")
             ]),
-            motivo: new FormControl('', [
+            reason: new FormControl('', [
                 Validators.required,
-                Validators.minLength(6)
+                Validators.minLength(10)
             ]),
-            message: new FormControl('', [
-                Validators.required,
-                Validators.minLength(6)
-            ]),
+            message: new FormControl('', []),
         });
     }
 
     ngOnInit(): void {
+        this.basicContactForm.valueChanges.subscribe(form => {
+            this.saveFormEmitter.emit(form);
+        })
+        
+        if (this.basicContactFormSaved !== undefined) {
+            Object.keys(this.basicContactForm.controls).forEach(key => {
+                this.f[key].setValue(this.basicContactFormSaved[key]);
+            })
+        }
     }
 
     get f(): { [key: string]: AbstractControl } {
         return this.basicContactForm.controls;
     }
 
-    getErrorMessage() {
-        if (this.f['email'].hasError('required')) {
+    getErrorMessage(controlName: string) {
+        if (this.f[controlName].hasError('required')) {
             return 'You must enter a value';
+        } else if (this.f[controlName].hasError('pattern')) {
+            return 'Just numbers, "+" and spaces are allow';
+        } else if (this.f[controlName].hasError('minlength')) {
+            return 'It should contain some more letter';
+        } 
+        else if (this.f[controlName].hasError('email')) {
+            return 'Not a valid email';
         }
+        
+        return '';
+    }
 
-        return this.f['email'].hasError('email') ? 'Not a valid email' : '';
+    sendBasicForm() {
+        if (this.basicContactForm.valid) {
+            this.basicFormEmitter.emit(this.basicContactForm.value);
+        }
     }
 
 }

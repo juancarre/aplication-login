@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/Service/user.service';
@@ -11,7 +11,7 @@ import Validation from 'src/app/core/utils/validation';
     templateUrl: "./register.component.html",
     styleUrls: ["./register.component.css"]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
     registerForm: FormGroup;
     submitted: boolean = false;
@@ -55,10 +55,6 @@ export class RegisterComponent implements OnInit {
         )
     }
 
-    ngOnInit(): void {
-
-    }
-
     get f(): { [key: string]: AbstractControl } {
         return this.registerForm.controls;
     }
@@ -94,6 +90,7 @@ export class RegisterComponent implements OnInit {
                 Object.assign(newUser, {userType: this.userType});
             }
             
+            // Registro al usuario
             this.userService.register(newUser).subscribe({
                 next: () => {
                     this.loading = false;

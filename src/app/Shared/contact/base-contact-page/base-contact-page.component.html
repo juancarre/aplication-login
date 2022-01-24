@@ -1,7 +1,35 @@
 <section class="page-section" id="contact">
     <div class="container">
         <div class="text-center">
-            <app-contact-basic-form></app-contact-basic-form>
+            <div class="container contact-container">
+                <div class="text-center">
+                    <h2 class="header text-uppercase">Contact Us</h2>
+                </div>
+
+                <mat-radio-group aria-label="Select an option">
+                    <div class="row form-select-container">
+                        <div class="col-4 col-md-1">
+                            <mat-radio-button (change)="changeForm(true)" checked="true" value="1">Básico
+                            </mat-radio-button>
+                        </div>
+                        <div class="col-4 col-md-1">
+                            <mat-radio-button (click)="changeForm(false)" value="2">Avanzado</mat-radio-button>
+                        </div>
+                    </div>
+                </mat-radio-group>
+
+                <div class="basic-form-div" *ngIf="display" @inOutBasicForm>
+                    <app-contact-basic-form [basicContactFormSaved]="basicForm" (basicFormEmitter)="sendForm($event)" (saveFormEmitter)="saveForm($event, 'basic')"></app-contact-basic-form>
+                </div>
+                <div class="advanced-form-div" *ngIf="!display" @inOutAdvancedForm>
+                    <app-contact-advanced-form [advancedContactFormSaved]="advancedForm" (advancedFormEmitter)="sendForm($event)" (saveFormEmitter)="saveForm($event, 'advanced')"></app-contact-advanced-form>
+                </div>
+
+                <div class="text-center send-container">
+                <button (click)="sendAction()" mat-flat-button color="primary">Send {{basicForm?.invalid}}</button>
+                </div>
+
+            </div>
         </div>
     </div>
 </section>

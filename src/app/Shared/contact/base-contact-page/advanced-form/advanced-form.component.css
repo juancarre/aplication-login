@@ -1,0 +1,103 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.h100 {
+    height: 100%;
+}
+.text-left {
+    text-align: left;
+}
+.advanced-form-card {
+    background-color: black;
+    opacity: 0.7;
+    border-radius: 1.25rem;
+    padding: 1rem;
+}
+.collapsible {
+    overflow: clip;
+}
+.advanced-form-card input,
+::ng-deep.advanced-form-card .mat-form-field input {
+    height: 2rem;
+}
+.advanced-form-card input,
+.advanced-form-card textarea,
+::ng-deep.advanced-form-card .mat-form-field-infix input {
+    color: darkgrey;
+}
+.advanced-form-card .mat-form-field {
+    width: 100%;
+}
+::ng-deep .advanced-form-card .mat-form-field-label {
+    color: white !important;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline::before {
+    background-color: grey !important;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: white !important;
+ }
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: white !important;
+} 
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: white !important;;
+}
+::ng-deep .form-group-textarea .mat-form-field-wrapper,
+::ng-deep .form-group-textarea .mat-form-field-flex,
+::ng-deep .form-group-textarea .mat-form-field-infix{
+    /*change color of underline when focused*/
+    height: 100% !important;
+}
+::ng-deep.mat-radio-outer-circle {
+    border-color: rgb(66, 134, 244);
+}
+::ng-deep.mat-input-element::placeholder {
+    color: darkgrey;
+}
+
+/* Tipe picker styles */
+::ng-deep.datetime-container .mat-select-value {
+    max-width: none !important;
+    height: 1.8rem;
+    vertical-align: middle;
+}
+
+/* Date time styles */
+.datetime-container input {
+    border: 0;
+    background-color: gray;
+    color: black;
+    font-weight: bold;
+    border-style: none;
+    outline: none;
+    width: 100%;
+}
+::ng-deep.datetime-container .mat-select-value {
+    max-width: none !important;
+}
+::ng-deep.mat-icon {
+    color: gray;
+}
+::ng-deep.mat-form-field span {
+    color: darkgrey;
+}
+::ng-deep.datetime-container .arrows-wrap {
+    display: none !important;
+}
+
+/* Checkbox styles */
+.checkbox-container {
+    margin-top: 1rem;
+}
+::ng-deep.checkbox-container .mat-checkbox-frame {
+    border-color: rgb(66, 134, 244);
+}
+::ng-deep.checkbox-container .mat-checkbox-label {
+    color: darkgrey;
+}

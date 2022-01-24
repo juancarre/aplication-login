@@ -6,12 +6,6 @@
 .h100 {
     height: 100%;
 }
-.contact-container .header {
-    font-size: 2.5rem;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
-    color: darkgrey;
-}
 .basic-form-card {
     background-color: black;
     opacity: 0.7;
@@ -51,4 +45,4 @@
 ::ng-deep .form-group-textarea .mat-form-field-infix{
     /*change color of underline when focused*/
     height: 100% !important;
-   }
+}
