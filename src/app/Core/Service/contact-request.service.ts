@@ -12,7 +12,7 @@ export class ContactRequestService {
         private http: HttpClient
     ) { }
 
-    createContactRequest(user: UserModel, email: string, payload: object) {
+    createContactRequest(user: UserModel, payload: object) {
         Object.assign(payload, {owner: 'api/v1/users/' + user.id})
         return this.http.post(`${environment.apiUrl}contact_requests`, payload);
     }

@@ -107,7 +107,7 @@ export class BaseContactPageComponent implements OnInit {
     sendForm(form: FormGroup) {
         console.log(form);
 
-        this.contactRequestService.createContactRequest(this.user, '', form).subscribe(contactRequest => {
+        this.contactRequestService.createContactRequest(this.user, form).subscribe(contactRequest => {
             console.log(contactRequest);
             
         });
