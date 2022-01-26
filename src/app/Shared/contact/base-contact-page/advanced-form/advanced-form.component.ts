@@ -61,6 +61,9 @@ export class AdvancedFormComponent implements OnInit {
             joinMyTeam: new FormControl('', []),
             orderProject: new FormControl('', []),
         });
+
+        this.f['joinMyTeam'].setValue(false);
+        this.f['orderProject'].setValue(false);
     }
 
     ngOnInit(): void {

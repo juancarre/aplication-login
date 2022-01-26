@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 // import { trigger, state, style, animate, transition, query, group } from '@angular/animations';
 import {
     animation, trigger, animateChild, group,
@@ -9,6 +9,9 @@ import { RouterOutlet, Router } from '@angular/router';
 import { BasicFormComponent } from './basic-form/basic-form.component';
 import { FormGroup } from '@angular/forms';
 import { AdvancedFormComponent } from './advanced-form/advanced-form.component';
+import { ContactRequestService } from '../../../core/Service/contact-request.service';
+import { UserService } from '../../../core/Service/user.service';
+import { UserModel } from 'src/app/core/Model/user';
 
 @Component({
     selector: 'app-base-contact-page',
@@ -35,18 +38,31 @@ import { AdvancedFormComponent } from './advanced-form/advanced-form.component';
         ])
     ],
 })
-export class BaseContactPageComponent {
+export class BaseContactPageComponent implements OnInit {
 
     public display: boolean = true;
     public basicForm: FormGroup;
     public advancedForm: FormGroup;
+    public isDataAvailable: boolean = false;
+    public user: UserModel
 
     constructor(
-        private router: Router
+        private router: Router,
+        private contactRequestService: ContactRequestService,
+        private userService: UserService
     ) { }
 
     @ViewChild(BasicFormComponent) basicFormChild?: BasicFormComponent;
     @ViewChild(AdvancedFormComponent) advancedFormChild?: AdvancedFormComponent;
+
+    ngOnInit(): void {
+        this.userService.getUser().subscribe(user => {
+            if (user instanceof UserModel) {
+                this.user = user;
+                this.isDataAvailable = true;
+            }
+        });
+    }
 
     prepareRoute(outlet: RouterOutlet) {
         return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
@@ -90,8 +106,11 @@ export class BaseContactPageComponent {
 
     sendForm(form: FormGroup) {
         console.log(form);
-        
-    }
 
+        this.contactRequestService.createContactRequest(this.user, '', form).subscribe(contactRequest => {
+            console.log(contactRequest);
+            
+        });
+    }
 
 }
